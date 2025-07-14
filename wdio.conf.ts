@@ -24,7 +24,11 @@ export const config: WebdriverIO.Config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './test/specs/**/*.ts'
+        //'./test/specs/**/*.ts'
+        [
+            './test/specs/app.ui.test.ts',
+            './test/specs/app.webview.test.ts'
+        ]
     ],
     // Patterns to exclude.
     exclude: [
@@ -243,8 +247,9 @@ export const config: WebdriverIO.Config = {
      * Hook that gets executed after the suite has ended
      * @param {object} suite suite details
      */
-    // afterSuite: function (suite) {
-    // },
+    afterSuite: function (suite) {
+        driver.relaunchActiveApp();
+    },
     /**
      * Runs after a WebdriverIO command gets executed
      * @param {string} commandName hook command name
