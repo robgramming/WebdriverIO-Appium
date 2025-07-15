@@ -27,7 +27,9 @@ export const config: WebdriverIO.Config = {
         //'./test/specs/**/*.ts'
         [
             './test/specs/app.ui.test.ts',
-            './test/specs/app.webview.test.ts'
+            './test/specs/app.webview.test.ts',
+            './test/specs/app.registration.test.ts',
+            './test/specs/app.login.test.ts'
         ]
     ],
     // Patterns to exclude.
@@ -100,7 +102,7 @@ export const config: WebdriverIO.Config = {
     // baseUrl: 'http://localhost:8080',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 20000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
@@ -214,8 +216,9 @@ export const config: WebdriverIO.Config = {
      * Hook that gets executed before the suite starts
      * @param {object} suite suite details
      */
-    // beforeSuite: function (suite) {
-    // },
+    beforeSuite: async function () {
+        await driver.relaunchActiveApp();
+    },
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
